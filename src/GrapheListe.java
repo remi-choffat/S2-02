@@ -28,7 +28,17 @@ public class GrapheListe implements Graphe {
    }
 
    public void ajouterArc(String depart, String destination, double cout) {
-      // TODO
+
+       if(!noeuds.contains(depart)){
+	   noeuds.add(depart);
+	   adjacence.add(new Arcs());
+       }
+       if(!noeuds.contains(destination)){
+	   noeuds.add(destination);
+	   adjacence.add(new Arcs());
+       }
+
+       adjacence.get(noeuds.indexOf(depart)).ajouterArc(new Arc(destination, cout));
    }
 
 }
