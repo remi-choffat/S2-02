@@ -1,18 +1,20 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Classe de test
  */
 public class TestGraphe {
 
-   /**
-    * Test de la methode la construction d'un graphe
-    */
-   @Test
-   public void testGrapheListe() {
-      GrapheListe g = new GrapheListe();
+   // Creation d'un graphe pour les tests
+   static GrapheListe g = new GrapheListe();
+   static BellmanFord bf = new BellmanFord();
+
+   @BeforeAll
+   public static void createGraph() {
       g.ajouterArc("A", "B", 1);
       g.ajouterArc("A", "C", 2);
       g.ajouterArc("B", "C", 3);
@@ -22,6 +24,13 @@ public class TestGraphe {
       g.ajouterArc("D", "A", 7);
       g.ajouterArc("D", "B", 8);
       g.ajouterArc("D", "C", 9);
+   }
+
+   /**
+    * Test de la methode la construction d'un graphe
+    */
+   @Test
+   public void testGrapheListe() {
       assertEquals("[A, B, C, D]", g.listeNoeuds().toString(), "Liste des noeuds");
       assertEquals("[B(1.0), C(2.0)]", g.suivants("A").toString());
       assertEquals("[C(3.0)]", g.suivants("B").toString());
@@ -30,19 +39,23 @@ public class TestGraphe {
    }
 
    /**
-    * Test du calcul des parents des nœuds
-    */
-   @Test
-   public void testParents() {
-      // TODO - Test du calcul des parents des nœuds
-   }
-
-   /**
     * Test de l'algorithme du point fixe
     */
    @Test
    public void testPointFixe() {
-      // TODO - Test de l'algorithme du point fixe
+      Valeur v = bf.resoudre(g, "A");
+      assertEquals(0.0, v.getValeur("A"), "A");
+      assertEquals(1.0, v.getValeur("B"), "B");
+      assertEquals(2.0, v.getValeur("C"), "C");
+      assertEquals(8.0, v.getValeur("D"), "D");
+   }
+
+   /**
+    * Test de l'algorithme du point fixe avec un sommet inexistant
+    */
+   @Test
+   public void testPointFixeInexistant() {
+      assertThrows(IllegalArgumentException.class, () -> bf.resoudre(g, "E"));
    }
 
 }

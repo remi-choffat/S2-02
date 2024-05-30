@@ -14,11 +14,16 @@ public class BellmanFord implements Algorithme {
     * @param depart nœud de départ
     * @return la valeur du chemin le plus court
     */
-   public Valeur resoudre(Graphe g, String depart) {
+   public Valeur resoudre(Graphe g, String depart) throws IllegalArgumentException {
       Valeur v = new Valeur();
 
       // Liste des noeuds du graphe
       List<String> listeNoeuds = g.listeNoeuds();
+
+      // Vérifie si le nœud de départ existe
+      if (!listeNoeuds.contains(depart)) {
+         throw new IllegalArgumentException("Le nœud de départ indiqué (" + depart + ") n'existe pas");
+      }
 
       // Initialise le nœud de départ à 0 et le reste à +∞
       for (String noeud : listeNoeuds) {
