@@ -13,6 +13,8 @@ public class Main {
       gl.ajouterArc("C", "A", 19);
       System.out.println(gl);
 
+      // TODO - Appliquer l'algo du point fixe et afficher les valeurs de distance pour chaque nœud (Q10)
+
    }
 
 }

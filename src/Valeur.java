@@ -1,7 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.List;
 
 /**
  * Classe fournie, permet de stocker des valeurs associées au noeud et des parents
@@ -11,81 +11,97 @@ import java.util.List;
  */
 public class Valeur {
 
-    /**
-     * attributs pour stocker les informations (type Table = Dictionnaire)
-     * dans le programme de 2 annee.
-     */
-    Map<String, Double> valeur;
-    Map<String, String> parent;
+   /**
+    * attributs pour stocker les informations (type Table = Dictionnaire)
+    * dans le programme de 2 annee.
+    */
+   Map<String, Double> valeur;
+   Map<String, String> parent;
 
-    /**
-     * constructeur vide (initialise la possibilité de stocker des valeurs)
-     */
-    public Valeur() {
-        this.valeur = new TreeMap<>();
-        this.parent = new TreeMap<>();
-    }
+   /**
+    * constructeur vide (initialise la possibilité de stocker des valeurs)
+    */
+   public Valeur() {
+      this.valeur = new TreeMap<>();
+      this.parent = new TreeMap<>();
+   }
 
-    /**
-     * permet d'associer une valeur a un nom de noeud (ici L(X))
-     *
-     * @param nom    le nom du noeud
-     * @param valeur la valeur associée
-     */
-    public void setValeur(String nom, double valeur) {
-        // modifie valeur
-        this.valeur.put(nom, valeur);
-    }
+   /**
+    * permet d'associer une valeur a un nom de noeud (ici L(X))
+    *
+    * @param nom    le nom du noeud
+    * @param valeur la valeur associée
+    */
+   public void setValeur(String nom, double valeur) {
+      // modifie valeur
+      this.valeur.put(nom, valeur);
+   }
 
-    /**
-     * * permet d'associer un parent a un nom de noeud (ici parent(X))
-     *
-     * @param nom    nom du noeud
-     * @param parent nom du noeud parent associe
-     */
-    public void setParent(String nom, String parent) {
-        this.parent.put(nom, parent);
-    }
+   /**
+    * * permet d'associer un parent a un nom de noeud (ici parent(X))
+    *
+    * @param nom    nom du noeud
+    * @param parent nom du noeud parent associe
+    */
+   public void setParent(String nom, String parent) {
+      this.parent.put(nom, parent);
+   }
 
-    /**
-     * accede au parent stocke associe au noeud nom passe en parametre
-     *
-     * @param nom nom du noeud
-     * @return le nom du noeud parent
-     */
-    public String getParent(String nom) {
-        return this.parent.get(nom);
-    }
+   /**
+    * accede au parent stocke associe au noeud nom passe en parametre
+    *
+    * @param nom nom du noeud
+    * @return le nom du noeud parent
+    */
+   public String getParent(String nom) {
+      return this.parent.get(nom);
+   }
 
 
-    /**
-     * accede a la valeur associee au noeud nom passe en parametre
-     *
-     * @param nom nom du noeud
-     * @return la valeur stockee
-     */
-    public double getValeur(String nom) {
-        return this.valeur.get(nom);
-    }
+   /**
+    * accede a la valeur associee au noeud nom passe en parametre
+    *
+    * @param nom nom du noeud
+    * @return la valeur stockee
+    */
+   public double getValeur(String nom) {
+      return this.valeur.get(nom);
+   }
 
-    /**
-     * retourne une chaine qui affiche le contenu
-     * - par noeud stocke
-     * - a chaque noeud, affiche la valeur puis le noeud parent
-     *
-     * @return descriptif du noeud
-     */
-    public String toString() {
-        String res = "";
-        // pour chaque noeud
-        for (String s : this.valeur.keySet()) {
-            // ajoute la valeur et le noeud parent
-            Double valeurNoeud = valeur.get(s);
-            String noeudParent = parent.get(s);
-            res += s + " ->  V:" + valeurNoeud + " p:" + noeudParent + "\n";
-        }
-        return res;
+   /**
+    * retourne une chaine qui affiche le contenu
+    * - par noeud stocke
+    * - a chaque noeud, affiche la valeur puis le noeud parent
+    *
+    * @return descriptif du noeud
+    */
+   public String toString() {
+      String res = "";
+      // pour chaque noeud
+      for (String s : this.valeur.keySet()) {
+         // ajoute la valeur et le noeud parent
+         Double valeurNoeud = valeur.get(s);
+         String noeudParent = parent.get(s);
+         res += s + " ->  V:" + valeurNoeud + " p:" + noeudParent + "\n";
+      }
+      return res;
 
-    }
+   }
 
+   /**
+    * Retourne le chemin pour aller à destination
+    *
+    * @param destination le nœud destination
+    * @return le chemin pour aller à destination
+    */
+   public List<String> calculerChemin(String destination) {
+      // TODO : à vérifier (Q11)
+      List<String> chemin = new ArrayList<>();
+      String noeud = destination;
+      while (noeud != null) {
+         chemin.add(noeud);
+         noeud = parent.get(noeud);
+      }
+      return chemin;
+   }
 }

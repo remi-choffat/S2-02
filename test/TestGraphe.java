@@ -29,4 +29,20 @@ public class TestGraphe {
       assertEquals("[A(7.0), B(8.0), C(9.0)]", g.suivants("D").toString());
    }
 
+   /**
+    * Test du calcul des parents des nœuds
+    */
+   @Test
+   public void testParents() {
+      // TODO - Test du calcul des parents des nœuds
+   }
+
+   /**
+    * Test de l'algorithme du point fixe
+    */
+   @Test
+   public void testPointFixe() {
+      // TODO - Test de l'algorithme du point fixe
+   }
+
 }
