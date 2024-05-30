@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Permet de stocker des arcs
+ */
 public class Arcs {
 
    /**

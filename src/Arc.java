@@ -1,3 +1,6 @@
+/**
+ * Classe représentant un arc d'un graphe
+ */
 public class Arc {
 
    /**

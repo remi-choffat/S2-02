@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implémentation d'un graphe sous forme de liste d'adjacence
+ */
 public class GrapheListe implements Graphe {
 
    /**

@@ -1,3 +1,7 @@
+/**
+ * Classe permettant de résoudre le chemin le plus court d'un graphe
+ * en utilisant l'algorithme de Dijkstra
+ */
 public class Dijkstra implements Algorithme {
 
    /*
@@ -30,7 +34,7 @@ public class Dijkstra implements Algorithme {
     */
 
    /**
-    * Résoudre le plus court chemin
+    * Résolution du chemin le plus court en partant d'un nœud de départ
     *
     * @param g      le graphe
     * @param depart le nœud de départ

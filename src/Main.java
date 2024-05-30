@@ -12,12 +12,13 @@ public class Main {
       gl.ajouterArc("B", "E", 11);
       gl.ajouterArc("C", "A", 19);
 
-      System.out.println(gl);
-      System.out.println("--------------------------------------------");
-      Valeur v = BellmanFord.resoudre(gl, "A");
-      System.out.println(v);
+      System.out.println("------- Graphe -------\n" + gl);
 
-      // TODO - Appliquer l'algo du point fixe et afficher les valeurs de distance pour chaque nœud (Q10)
+      // Résolution du chemin le plus court en partant de A par l'algo de BellmanFord
+      System.out.println("------- Chemin le plus court en partant de A -------");
+      BellmanFord bf = new BellmanFord();
+      Valeur v = bf.resoudre(gl, "A");
+      System.out.println(v);
 
    }
 
