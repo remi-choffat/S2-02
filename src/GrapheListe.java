@@ -3,17 +3,17 @@ import java.util.List;
 
 public class GrapheListe implements Graphe {
 
-   /*
+   /**
     * Liste des noeuds du graphe
     */
    private ArrayList<String> noeuds;
 
-   /*
+   /**
     * Liste des Arcs partant de chaque nœud du graphe
     */
    private ArrayList<Arcs> adjacence;
 
-   /*
+   /**
     * Constructeur de GrapheListe
     */
    public GrapheListe() {
@@ -21,8 +21,9 @@ public class GrapheListe implements Graphe {
       adjacence = new ArrayList<Arcs>();
    }
 
-   /*
+   /**
     * Retourne la liste des nœuds du graphe
+    *
     * @return la liste des nœuds du graphe
     */
    @Override
@@ -30,8 +31,9 @@ public class GrapheListe implements Graphe {
       return this.noeuds;
    }
 
-   /*
+   /**
     * Retourne la liste des arcs partant du nœud n
+    *
     * @param n : le nœud
     * @return la liste des arcs partant du nœud n
     */
@@ -40,19 +42,20 @@ public class GrapheListe implements Graphe {
       return adjacence.get(getIndice(n)).getArcs();
    }
 
-   /*
+   /**
     * Retourne l'indice du nœud n dans la liste des nœuds
     */
    public int getIndice(String n) {
       return noeuds.indexOf(n);
    }
 
-   /*
+   /**
     * Ajoute un arc au graphe
     * Si les nœuds de départ et de destination n'existent pas, ils sont créés
-    * @param depart : le nœud de départ
+    *
+    * @param depart      : le nœud de départ
     * @param destination : le nœud de destination
-    * @param cout : le coût de l'arc
+    * @param cout        : le coût de l'arc
     */
    public void ajouterArc(String depart, String destination, double cout) {
 
@@ -68,8 +71,9 @@ public class GrapheListe implements Graphe {
       adjacence.get(noeuds.indexOf(depart)).ajouterArc(new Arc(destination, cout));
    }
 
-   /*
+   /**
     * Retourne une représentation du graphe
+    *
     * @return une chaîne de caractères représentant le graphe
     */
    @Override
