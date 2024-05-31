@@ -35,6 +35,16 @@ public class GrapheListe implements Graphe {
    }
 
    /**
+    * Retourne la liste d'adjacence du graphe
+    * (utile pour les tests)
+    *
+    * @return la liste d'adjacence du graphe
+    */
+   public ArrayList<Arcs> getAdjacence() {
+      return adjacence;
+   }
+
+   /**
     * Retourne la liste des arcs partant du nœud n
     *
     * @param n : le nœud
