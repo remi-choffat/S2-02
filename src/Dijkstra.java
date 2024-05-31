@@ -58,7 +58,8 @@ public class Dijkstra implements Algorithme {
       }
 
       // Compter le nombre d'itérations pour comparer les algos
-      int compteur = 0;
+      int compteur_etapes = 0;
+      int compteur_calculs = 0;
       v.setValeur(depart, 0);
       while (!Q.isEmpty()) {
          String noeud = Q.get(0);
@@ -90,11 +91,13 @@ public class Dijkstra implements Algorithme {
                   v.setValeur(u, dist);
                   v.setParent(u, noeud);
                }
+	       compteur_calculs++;
             }
          }
-	 compteur++;
+	 compteur_etapes++;
       }
-      System.out.println("Nombre d'itérations avec la méthode de Dijkstra : " + compteur);
+      System.out.println("Nombre d'itérations avec la méthode de Dijkstra : " + compteur_etapes);
+      System.out.println("Nombre de calculs avec la méthode de Dijkstra : " + compteur_calculs);
       return v;
    }
 

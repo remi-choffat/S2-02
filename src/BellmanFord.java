@@ -72,8 +72,9 @@ public class BellmanFord implements Algorithme {
       ArrayList<Double> list_vals = new ArrayList<>();
       ArrayList<Double> list_tmp_vals;
 
-      // Compter le nombre d'itérations pour comparer les algos
-      int compteur = 0;
+      // Compter le nombre d'itérations et de calculs pour comparer les algos
+      int compteur_etapes = 0;
+      int compteur_calculs = 0;
       // Application de la méthode de point fixe
       do {
 
@@ -97,15 +98,17 @@ public class BellmanFord implements Algorithme {
                   // Applique le nœud actuel en tant que parent au successeur
                   v.setParent(successeur.getDest(), noeud);
                }
+	       compteur_calculs++;
                // Ajoute le résultat à la liste de comparaison
                list_vals.add(val);
             }
          }
-	 compteur++;
+	 compteur_etapes++;
 
          // Si le résultat est le même que le précédent, arrêter la boucle
       } while (!list_vals.equals(list_tmp_vals));
-      System.out.println("Nombre d'itérations avec la méthode de Bellman-Ford : " + compteur);
+      System.out.println("Nombre d'itérations avec la méthode de Bellman-Ford : " + compteur_etapes);
+      System.out.println("Nombre de calculs avec la méthode de Bellman-Ford : " + compteur_calculs);
 
       return v;
    }
