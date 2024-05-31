@@ -73,7 +73,6 @@ public class Dijkstra implements Algorithme {
 
 		if(index_u_suivant != -1){
 		    double dist = v.getValeur(noeud) + g.suivants(noeud).get(index_u_suivant).getCout();
-		    System.out.println("Parent : "+noeud+"\nEnfant : "+u+"\nDist"+dist);
 		    if(dist < v.getValeur(u)){
 			v.setValeur(u, dist);
 			v.setParent(u, noeud);
