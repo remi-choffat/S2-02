@@ -7,6 +7,40 @@ import java.util.List;
  */
 public class BellmanFord implements Algorithme {
 
+   /*
+   fonction pointFixe(Graphe g, Noeud depart) retourne v:
+   début
+      listeNoeuds <- g.listeNoeuds()
+      Pour chaque noeud de listeNoeuds
+         Si noeud = depart
+            v.setValeur(depart, 0)
+         Sinon
+            v.setValeur(noeud, Infini)
+         Fin si
+      Fin Pour
+
+      list_vals <- {depart}
+      list_tmp_vals <- {}
+
+      Tant que non list_vals = list_tmp_vals Faire
+         list_tmp_vals <- list_vals
+         list_vals <- {}
+
+         Pour noeud dans listeNoeuds faire
+            suivants <- g.suivants(noeud)
+            Pour successeur dans suivants Faire
+               val <- successeur.getCout() + v.getValeur(noeud)
+               Si v.getValeur(successeur.getDest()) > val Alors
+                  v.setValeur(successeur.getDest(), val)
+                  v.setParent(successeur.getDest(), noeud)
+               Fin Si
+               list_vals <- list_vals U {val}
+            Fin Pour
+         Fin Pour
+      Fin tant que
+   fin
+    */
+
    /**
     * Résolution du chemin le plus court en partant d'un nœud de départ
     *
