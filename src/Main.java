@@ -15,11 +15,17 @@ public class Main {
       System.out.println("------- Graphe -------\n" + gl);
 
       // Résolution du chemin le plus court en partant de A par l'algo de BellmanFord
-      System.out.println("------- Chemin le plus court en partant de A -------");
+      System.out.println("------- Chemin le plus court en partant de A (Bellman-Ford)-------");
       BellmanFord bf = new BellmanFord();
       Valeur v = bf.resoudre(gl, "A");
       System.out.println(v);
       System.out.println("Chemin pour aller à C : " + v.calculerChemin("C"));
+
+      // Résolution du chemin le plus court en partant de A par l'algo de Dijkstra
+      System.out.println("------- Chemin le plus court en partant de A (Dijkstra)-------");
+      Dijkstra d = new Dijkstra();
+      v = d.resoudre(gl, "A");
+      System.out.println(v);
 
    }
 
