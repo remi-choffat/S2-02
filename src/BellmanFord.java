@@ -72,6 +72,8 @@ public class BellmanFord implements Algorithme {
       ArrayList<Double> list_vals = new ArrayList<>();
       ArrayList<Double> list_tmp_vals;
 
+      // Compter le nombre d'itérations pour comparer les algos
+      int compteur = 0;
       // Application de la méthode de point fixe
       do {
 
@@ -99,9 +101,11 @@ public class BellmanFord implements Algorithme {
                list_vals.add(val);
             }
          }
+	 compteur++;
 
          // Si le résultat est le même que le précédent, arrêter la boucle
       } while (!list_vals.equals(list_tmp_vals));
+      System.out.println("Nombre d'itérations avec la méthode de Bellman-Ford : " + compteur);
 
       return v;
    }
