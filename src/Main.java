@@ -12,24 +12,27 @@ public class Main {
       gl.ajouterArc("B", "E", 11);
       gl.ajouterArc("C", "A", 19);
 
+      // Affichage du graphe
       System.out.println("------- Graphe -------\n" + gl);
+
+      // Algorithme de résolution (ici, BellmanFord)
+      Algorithme algorithme = new BellmanFord();
 
       // Résolution du chemin le plus court en partant de A par l'algo de BellmanFord
       System.out.println("------- Chemin le plus court en partant de A (Bellman-Ford)-------");
-      // Algorithme de résolution
-      Algorithme algorithme = new BellmanFord();
       // Résolution du graphe en utilisant l'algorithme défini
       Valeur v = gl.resoudreGraphe(algorithme, "A");
       System.out.println(v);
       for (String noeud : gl.listeNoeuds()) {
          System.out.println("Chemin pour aller à " + noeud + " : " + v.calculerChemin(noeud));
       }
+      System.out.println();
 
       // Résolution du chemin le plus court en partant de 1 par l'algo de BellmanFord avec un fichier préconfiguré
-      GrapheListe g2 = new GrapheListe("../graphes/Graphe301.txt");
+      GrapheListe g2 = new GrapheListe("./graphes/Graphe301.txt");
       System.out.println("------- Chemin le plus court en partant de A (Bellman-Ford)-------");
-      bf = new BellmanFord();
-      v = bf.resoudre(g2, "1");
+      // Résolution du graphe en utilisant l'algorithme défini
+      v = g2.resoudreGraphe(algorithme, "1");
       System.out.println(v);
       System.out.println("Chemin pour aller à 202 : " + v.calculerChemin("202"));
 
