@@ -112,4 +112,8 @@ public class BellmanFord implements Algorithme {
 
       return v;
    }
+
+   public String toString() {
+      return "Bellman-Ford";
+   }
 }

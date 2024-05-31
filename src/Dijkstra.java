@@ -101,4 +101,8 @@ public class Dijkstra implements Algorithme {
       return v;
    }
 
+   public String toString() {
+      return "Dijkstra";
+   }
+
 }
