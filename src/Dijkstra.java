@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Classe permettant de résoudre le chemin le plus court d'un graphe
  * en utilisant l'algorithme de Dijkstra
@@ -40,9 +42,46 @@ public class Dijkstra implements Algorithme {
     * @param depart le nœud de départ
     * @return la valeur du plus court chemin
     */
-   public Valeur resoudre(Graphe g, String depart) {
-      // TODO - Implémentation de l'algo de Dijkstra (question 13)
-      return null;
-   }
+    public Valeur resoudre(Graphe g, String depart) {
+
+	Valeur v = new Valeur();
+	ArrayList<String> Q = new ArrayList<>();
+	for(String n : g.listeNoeuds()){
+	    v.setValeur(n, Double.MAX_VALUE);
+	    v.setParent(n, null);
+	    Q.add(n);
+	}
+
+	v.setValeur(depart, 0);
+	while(!Q.isEmpty()){
+	    String noeud = Q.get(0);
+	    for(String s : Q){
+		if(v.getValeur(s) < v.getValeur(noeud)){
+		    noeud = s;
+		}
+	    }
+	    Q.remove(noeud);
+
+	    for(String u : Q){
+		int index_u_suivant;
+		index_u_suivant = -1;
+		for(Arc suivant : g.suivants(noeud)){
+		    if(suivant.getDest().equals(u)){
+			index_u_suivant = g.suivants(noeud).indexOf(suivant);
+		    }
+		}
+
+		if(index_u_suivant != -1){
+		    double dist = v.getValeur(noeud) + g.suivants(noeud).get(index_u_suivant).getCout();
+		    System.out.println("Parent : "+noeud+"\nEnfant : "+u+"\nDist"+dist);
+		    if(dist < v.getValeur(u)){
+			v.setValeur(u, dist);
+			v.setParent(u, noeud);
+		    }
+		}
+	    }
+	}
+	return v;
+    }
 
 }
