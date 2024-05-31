@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,28 @@ public class GrapheListe implements Graphe {
    public GrapheListe() {
       noeuds = new ArrayList<String>();
       adjacence = new ArrayList<Arcs>();
+   }
+
+   /**
+    * Construit un graphe à partir d'un fichier
+    * @param nom_fichier nom du fichier dans lequel se situe le graphe
+    */
+   public GrapheListe(String nom_fichier) {
+       noeuds = new ArrayList<String>();
+       adjacence = new ArrayList<Arcs>();
+       String line;
+
+       try{
+	   BufferedReader br = new BufferedReader(new FileReader(nom_fichier));
+	   while((line = br.readLine()) != null){
+	       String[] elements = line.split("\t");
+	       ajouterArc(elements[0], elements[1], Double.parseDouble(elements[2]));
+	   }
+       }catch(FileNotFoundException e){
+	   System.out.println("Fichier invalide");
+       }catch(IOException e){
+	   System.out.println("Erreur de lecture du fichier");
+       }
    }
 
    /**

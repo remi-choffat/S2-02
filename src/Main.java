@@ -25,6 +25,14 @@ public class Main {
          System.out.println("Chemin pour aller à " + noeud + " : " + v.calculerChemin(noeud));
       }
 
+      // Résolution du chemin le plus court en partant de 1 par l'algo de BellmanFord avec un fichier préconfiguré
+      GrapheListe g2 = new GrapheListe("../graphes/Graphe301.txt");
+      System.out.println("------- Chemin le plus court en partant de A (Bellman-Ford)-------");
+      bf = new BellmanFord();
+      v = bf.resoudre(g2, "1");
+      System.out.println(v);
+      System.out.println("Chemin pour aller à 202 : " + v.calculerChemin("202"));
+
    }
 
 }
