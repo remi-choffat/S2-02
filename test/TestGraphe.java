@@ -161,4 +161,35 @@ public class TestGraphe {
       assertEquals("C", v.getParent("D"), "D");
    }
 
+   /**
+    * Test de l'algorithme de Dijkstra
+    */
+   @Test
+   public void testDijkstra() {
+      Valeur v = new Dijkstra().resoudre(g, "A");
+      assertEquals(0.0, v.getValeur("A"), "A");
+      assertEquals(1.0, v.getValeur("B"), "B");
+      assertEquals(2.0, v.getValeur("C"), "C");
+      assertEquals(8.0, v.getValeur("D"), "D");
+   }
+
+   /**
+    * Test de l'algorithme de Dijkstra avec un sommet inexistant
+    */
+   @Test
+   public void testDijkstraInexistant() {
+      assertThrows(IllegalArgumentException.class, () -> new Dijkstra().resoudre(g, "E"));
+   }
+
+   /**
+    * Test de l'algorithme de Dijkstra : calcul des parents
+    */
+   @Test
+   public void testDijkstraParents() {
+      Valeur v = new Dijkstra().resoudre(g, "A");
+      assertEquals("A", v.getParent("B"), "B");
+      assertEquals("A", v.getParent("C"), "C");
+      assertEquals("C", v.getParent("D"), "D");
+   }
+
 }

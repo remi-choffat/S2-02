@@ -42,45 +42,49 @@ public class Dijkstra implements Algorithme {
     * @param depart le nœud de départ
     * @return la valeur du plus court chemin
     */
-    public Valeur resoudre(Graphe g, String depart) {
+   public Valeur resoudre(Graphe g, String depart) throws IllegalArgumentException {
 
-	Valeur v = new Valeur();
-	ArrayList<String> Q = new ArrayList<>();
-	for(String n : g.listeNoeuds()){
-	    v.setValeur(n, Double.MAX_VALUE);
-	    v.setParent(n, null);
-	    Q.add(n);
-	}
+      if (!g.listeNoeuds().contains(depart)) {
+         throw new IllegalArgumentException("Le nœud de départ indiqué (" + depart + ") n'existe pas");
+      }
 
-	v.setValeur(depart, 0);
-	while(!Q.isEmpty()){
-	    String noeud = Q.get(0);
-	    for(String s : Q){
-		if(v.getValeur(s) < v.getValeur(noeud)){
-		    noeud = s;
-		}
-	    }
-	    Q.remove(noeud);
+      Valeur v = new Valeur();
+      ArrayList<String> Q = new ArrayList<>();
+      for (String n : g.listeNoeuds()) {
+         v.setValeur(n, Double.MAX_VALUE);
+         v.setParent(n, null);
+         Q.add(n);
+      }
 
-	    for(String u : Q){
-		int index_u_suivant;
-		index_u_suivant = -1;
-		for(Arc suivant : g.suivants(noeud)){
-		    if(suivant.getDest().equals(u)){
-			index_u_suivant = g.suivants(noeud).indexOf(suivant);
-		    }
-		}
+      v.setValeur(depart, 0);
+      while (!Q.isEmpty()) {
+         String noeud = Q.get(0);
+         for (String s : Q) {
+            if (v.getValeur(s) < v.getValeur(noeud)) {
+               noeud = s;
+            }
+         }
+         Q.remove(noeud);
 
-		if(index_u_suivant != -1){
-		    double dist = v.getValeur(noeud) + g.suivants(noeud).get(index_u_suivant).getCout();
-		    if(dist < v.getValeur(u)){
-			v.setValeur(u, dist);
-			v.setParent(u, noeud);
-		    }
-		}
-	    }
-	}
-	return v;
-    }
+         for (String u : Q) {
+            int index_u_suivant;
+            index_u_suivant = -1;
+            for (Arc suivant : g.suivants(noeud)) {
+               if (suivant.getDest().equals(u)) {
+                  index_u_suivant = g.suivants(noeud).indexOf(suivant);
+               }
+            }
+
+            if (index_u_suivant != -1) {
+               double dist = v.getValeur(noeud) + g.suivants(noeud).get(index_u_suivant).getCout();
+               if (dist < v.getValeur(u)) {
+                  v.setValeur(u, dist);
+                  v.setParent(u, noeud);
+               }
+            }
+         }
+      }
+      return v;
+   }
 
 }
