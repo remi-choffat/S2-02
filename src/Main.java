@@ -19,6 +19,7 @@ public class Main {
       BellmanFord bf = new BellmanFord();
       Valeur v = bf.resoudre(gl, "A");
       System.out.println(v);
+      System.out.println("Chemin pour aller à C : " + v.calculerChemin("C"));
 
    }
 

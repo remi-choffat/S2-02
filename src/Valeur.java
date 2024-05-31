@@ -95,11 +95,10 @@ public class Valeur {
     * @return le chemin pour aller à destination
     */
    public List<String> calculerChemin(String destination) {
-      // TODO : à vérifier (Q11)
       List<String> chemin = new ArrayList<>();
       String noeud = destination;
       while (noeud != null) {
-         chemin.add(noeud);
+         chemin.addFirst(noeud);
          noeud = parent.get(noeud);
       }
       return chemin;
