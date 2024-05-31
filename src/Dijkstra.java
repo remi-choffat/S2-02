@@ -63,7 +63,7 @@ public class Dijkstra implements Algorithme {
       v.setValeur(depart, 0);
       while (!Q.isEmpty()) {
          String noeud = Q.get(0);
-	 // Trouver le noeud restant avec la plus petit valeur
+         // Trouver le noeud restant avec la plus petit valeur
          for (String s : Q) {
             if (v.getValeur(s) < v.getValeur(noeud)) {
                noeud = s;
@@ -71,30 +71,30 @@ public class Dijkstra implements Algorithme {
          }
          Q.remove(noeud);
 
-	 // Cherche le chemin le plus court entre les enfants du noeud sélectionné
+         // Cherche le chemin le plus court entre les enfants du noeud sélectionné
          for (String u : Q) {
             int index_u_suivant;
             index_u_suivant = -1;
 
-	    // trouve l'index de l'enfant sélectionné
+            // trouve l'index de l'enfant sélectionné
             for (Arc suivant : g.suivants(noeud)) {
                if (suivant.getDest().equals(u)) {
                   index_u_suivant = g.suivants(noeud).indexOf(suivant);
                }
             }
 
-	    // Calcule la distance entre le noeud actuel et son enfant
-	    // Remplace la valeur de l'enfant si le résultat est plus petit
+            // Calcule la distance entre le noeud actuel et son enfant
+            // Remplace la valeur de l'enfant si le résultat est plus petit
             if (index_u_suivant != -1) {
                double dist = v.getValeur(noeud) + g.suivants(noeud).get(index_u_suivant).getCout();
                if (dist < v.getValeur(u)) {
                   v.setValeur(u, dist);
                   v.setParent(u, noeud);
                }
-	       compteur_calculs++;
+               compteur_calculs++;
             }
          }
-	 compteur_etapes++;
+         compteur_etapes++;
       }
       System.out.println("Nombre d'itérations avec la méthode de Dijkstra : " + compteur_etapes);
       System.out.println("Nombre de calculs avec la méthode de Dijkstra : " + compteur_calculs);
