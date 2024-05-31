@@ -17,11 +17,12 @@ public class MainDijkstra {
 
       // Résolution du chemin le plus court en partant de A par l'algo de Dijkstra
       System.out.println("------- Chemin le plus court en partant de A (Dijkstra)-------");
-      Dijkstra d = new Dijkstra();
-      Valeur v = new Valeur();
-      v = d.resoudre(gl, "A");
+      Dijkstra dijkstra = new Dijkstra();
+      Valeur v = gl.resoudreGraphe(dijkstra, "A");
       System.out.println(v);
-
+      for (String noeud : gl.listeNoeuds()) {
+         System.out.println("Chemin pour aller à " + noeud + " : " + v.calculerChemin(noeud));
+      }
    }
 
 }

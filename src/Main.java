@@ -16,10 +16,14 @@ public class Main {
 
       // Résolution du chemin le plus court en partant de A par l'algo de BellmanFord
       System.out.println("------- Chemin le plus court en partant de A (Bellman-Ford)-------");
-      BellmanFord bf = new BellmanFord();
-      Valeur v = bf.resoudre(gl, "A");
+      // Algorithme de résolution
+      Algorithme algorithme = new BellmanFord();
+      // Résolution du graphe en utilisant l'algorithme défini
+      Valeur v = gl.resoudreGraphe(algorithme, "A");
       System.out.println(v);
-      System.out.println("Chemin pour aller à C : " + v.calculerChemin("C"));
+      for (String noeud : gl.listeNoeuds()) {
+         System.out.println("Chemin pour aller à " + noeud + " : " + v.calculerChemin(noeud));
+      }
 
    }
 

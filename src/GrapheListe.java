@@ -101,4 +101,18 @@ public class GrapheListe implements Graphe {
       }
       return res.toString();
    }
+
+   /**
+    * Parcourt le graphe en fonction d'un algorithme donné
+    * et retourne la valeur du plus court chemin
+    * en partant du nœud de départ
+    *
+    * @param algo   : l'algorithme à utiliser
+    *               (BellmanFord ou Dijkstra)
+    * @param depart : le nœud de départ
+    * @return la valeur du plus court chemin
+    */
+   public Valeur resoudreGraphe(Algorithme algo, String depart) {
+      return algo.resoudre(this, depart);
+   }
 }
