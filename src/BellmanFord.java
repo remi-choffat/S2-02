@@ -113,6 +113,11 @@ public class BellmanFord implements Algorithme {
       return v;
    }
 
+   /**
+    * Retourne le nom de l'algorithme
+    *
+    * @return le nom de l'algorithme
+    */
    public String toString() {
       return "Bellman-Ford";
    }

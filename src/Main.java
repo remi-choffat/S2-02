@@ -1,31 +1,64 @@
+import java.io.File;
+
 public class Main {
+
+   public final static Algorithme BELLMAN_FORD = new BellmanFord();
+   public final static Algorithme DIJKSTRA = new Dijkstra();
 
    public static void main(String[] args) {
 
       // Calcul du chemin le plus court sur un graphe fourni, en utilisant les deux algorithmes
-      long start = System.currentTimeMillis();
-      calculer("./graphes/Graphe905.txt", "1", new BellmanFord());
-      long end = System.currentTimeMillis();
-      System.out.println("Temps d'exécution de Bellman-Ford : " + (end - start) + " ms");
-
-      start = System.currentTimeMillis();
-      calculer("./graphes/Graphe905.txt", "1", new Dijkstra());
-      end = System.currentTimeMillis();
-      System.out.println("Temps d'exécution de Dijkstra : " + (end - start) + " ms");
-
+      mesurerTemps(1, "1", BELLMAN_FORD);
+      mesurerTemps(1, "1", DIJKSTRA);
    }
 
+   /**
+    * Calcule le chemin le plus court en partant d'un nœud de départ
+    *
+    * @param g          graphe
+    * @param depart     noeud de départ
+    * @param algorithme algorithme à utiliser
+    */
    public static void calculer(String g, String depart, Algorithme algorithme) {
       // Création d'un graphe à partir d'un fichier préconfiguré
       GrapheListe graphe = new GrapheListe(g);
       // Résolution du graphe en utilisant l'algorithme défini
-      System.out.println("------- Chemin le plus court en partant de " + depart + " (" + algorithme + ")-------");
+      // System.out.println("------- Chemin le plus court en partant de " + depart + " (" + algorithme + ")-------");
       Valeur v = graphe.resoudreGraphe(algorithme, depart);
-      //System.out.println(v);
+      // System.out.println(v);
       // Affichage du chemin le plus court pour chaque nœud
-//      for (String noeud : graphe.listeNoeuds()) {
-//         System.out.println("Chemin pour aller à " + noeud + " : " + v.calculerChemin(noeud));
-//      }
+      // for (String noeud : graphe.listeNoeuds()) {
+      //    System.out.println("Chemin pour aller à " + noeud + " : " + v.calculerChemin(noeud));
+      // }
+   }
+
+   /**
+    * Mesure le temps d'exécution d'un algorithme sur un graphe donné
+    *
+    * @param nbExec     nombre d'exécutions
+    * @param depart     noeud de départ
+    * @param algorithme algorithme à exécuter
+    */
+   public static void mesurerTemps(int nbExec, String depart, Algorithme algorithme) {
+      int duration = 0;
+      int compteur = 0;
+      File folder = new File("graphes");
+      String[] listeGraphes = folder.list();
+      assert listeGraphes != null;
+      for (String s : listeGraphes) {
+         if (compteur > listeGraphes.length / 2) {
+            String g = "graphes/" + s;
+            for (int i = 0; i < nbExec; i++) {
+               long start = System.currentTimeMillis();
+               calculer(g, depart, algorithme);
+               long end = System.currentTimeMillis();
+               duration += (int) (end - start);
+            }
+         }
+         compteur++;
+      }
+      duration = duration / nbExec / listeGraphes.length;
+      System.out.println("Temps moyen d'exécution de " + algorithme + " : " + duration + " ms\n");
    }
 
 }

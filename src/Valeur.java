@@ -98,7 +98,7 @@ public class Valeur {
       List<String> chemin = new ArrayList<>();
       String noeud = destination;
       while (noeud != null) {
-         chemin.add(0,noeud);
+         chemin.add(0, noeud);
          noeud = parent.get(noeud);
       }
       return chemin;
