@@ -10,3 +10,5 @@
 > plus court chemin consiste à trouver un chemin d’un
 > nœud à un autre de sorte que la somme des coûts soit minimale. Le but de cette SAÉ est d'implémenter des solutions
 > algorithmiques pour ce problème.
+
+[Voir le rapport](https://github.com/remi-choffat/S2-02/blob/main/rapport_S2-02.pdf)
