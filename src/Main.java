@@ -8,8 +8,8 @@ public class Main {
    public static void main(String[] args) {
 
       // Calcul du chemin le plus court sur un graphe fourni, en utilisant les deux algorithmes
-      mesurerTemps(1, "1", BELLMAN_FORD);
-      mesurerTemps(1, "1", DIJKSTRA);
+      mesurerTemps(5, "1", BELLMAN_FORD);
+      mesurerTemps(5, "1", DIJKSTRA);
    }
 
    /**
@@ -41,21 +41,18 @@ public class Main {
     */
    public static void mesurerTemps(int nbExec, String depart, Algorithme algorithme) {
       int duration = 0;
-      int compteur = 0;
-      File folder = new File("graphes");
+      File folder = new File("../graphes");
       String[] listeGraphes = folder.list();
       assert listeGraphes != null;
       for (String s : listeGraphes) {
-         if (compteur > listeGraphes.length / 2) {
-            String g = "graphes/" + s;
+          String g = "../graphes/" + s;
+	  System.out.println(s);
             for (int i = 0; i < nbExec; i++) {
                long start = System.currentTimeMillis();
                calculer(g, depart, algorithme);
                long end = System.currentTimeMillis();
                duration += (int) (end - start);
             }
-         }
-         compteur++;
       }
       duration = duration / nbExec / listeGraphes.length;
       System.out.println("Temps moyen d'exécution de " + algorithme + " : " + duration + " ms\n");

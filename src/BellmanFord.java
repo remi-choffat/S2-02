@@ -107,9 +107,10 @@ public class BellmanFord implements Algorithme {
 
          // Si le résultat est le même que le précédent, arrêter la boucle
       } while (!list_vals.equals(list_tmp_vals));
-      System.out.println("Nombre d'itérations avec la méthode de Bellman-Ford : " + compteur_etapes);
-      System.out.println("Nombre de calculs avec la méthode de Bellman-Ford : " + compteur_calculs);
+      // System.out.println("Nombre d'itérations avec la méthode de Bellman-Ford : " + compteur_etapes);
+      // System.out.println("Nombre de calculs avec la méthode de Bellman-Ford : " + compteur_calculs);
 
+      
       return v;
    }
 
