@@ -42,63 +42,64 @@ public class Dijkstra implements Algorithme {
     * @param depart le nœud de départ
     * @return la valeur du plus court chemin
     */
-    public Valeur resoudre(Graphe g, String depart) throws IllegalArgumentException {
+   public Valeur resoudre(Graphe g, String depart) throws IllegalArgumentException {
 
-	if (!g.listeNoeuds().contains(depart)) {
-	    throw new IllegalArgumentException("Le nœud de départ indiqué (" + depart + ") n'existe pas");
-	}
+      // Vérifie que le nœud de départ existe
+      if (!g.listeNoeuds().contains(depart)) {
+         throw new IllegalArgumentException("Le nœud de départ indiqué (" + depart + ") n'existe pas");
+      }
 
-	Valeur v = new Valeur();
-	// Liste de noeuds à traiter
-	ArrayList<String> Q = new ArrayList<>();
+      Valeur v = new Valeur();
+      // Liste de nœuds à traiter
+      ArrayList<String> Q = new ArrayList<>();
 
-	for (String n : g.listeNoeuds()) {
-	    v.setValeur(n, Double.MAX_VALUE);
-	    v.setParent(n, null);
-	    Q.add(n);
-	}
+      // Initialisation des valeurs
+      for (String n : g.listeNoeuds()) {
+         v.setValeur(n, Double.MAX_VALUE);
+         v.setParent(n, null);
+         Q.add(n);
+      }
 
-	// Compter le nombre d'itérations pour comparer les algos
-	int compteur_etapes = 0;
-	int compteur_calculs = 0;
-	v.setValeur(depart, 0);
-	while (!Q.isEmpty()) {
-	    String noeud = Q.get(0);
-	    // Trouver le noeud restant avec la plus petit valeur
-	    for (String s : Q) {
-		if (v.getValeur(s) < v.getValeur(noeud)) {
-		    noeud = s;
-		}
-	    }
-	    Q.remove(noeud);
+      // Compter le nombre d'itérations pour comparer les algos
+      // (pour voir ces infos, retirer les commentaires lignes 90 et 91)
+      int compteur_etapes = 0;
+      int compteur_calculs = 0;
+      v.setValeur(depart, 0);
+      while (!Q.isEmpty()) {
+         String noeud = Q.get(0);
+         // Trouver le nœud restant avec la plus petite valeur
+         for (String s : Q) {
+            if (v.getValeur(s) < v.getValeur(noeud)) {
+               noeud = s;
+            }
+         }
+         Q.remove(noeud);
 
+         // Trouve l'index de l'enfant sélectionné
+         for (Arc suivant : g.suivants(noeud)) {
+            String nom_suivant = suivant.getDest();
+            double cout_suivant = suivant.getCout();
+            double dist = v.getValeur(noeud) + cout_suivant;
+            if (dist < v.getValeur(nom_suivant)) {
+               v.setValeur(nom_suivant, dist);
+               v.setParent(nom_suivant, noeud);
+            }
+            compteur_calculs++;
+         }
+         compteur_etapes++;
+      }
+      // System.out.println("Nombre d'itérations avec la méthode de Dijkstra : " + compteur_etapes);
+      // System.out.println("Nombre de calculs avec la méthode de Dijkstra : " + compteur_calculs);
+      return v;
+   }
 
-	    // trouve l'index de l'enfant sélectionné
-	    for (Arc suivant : g.suivants(noeud)) {
-		String nom_suivant = suivant.getDest();
-		double cout_suivant = suivant.getCout();
-		double dist = v.getValeur(noeud) + cout_suivant;
-		if (dist < v.getValeur(nom_suivant)) {
-		    v.setValeur(nom_suivant, dist);
-		    v.setParent(nom_suivant, noeud);
-		}
-		compteur_calculs++;
-	    }
-
-	compteur_etapes++;
-	}
-    // System.out.println("Nombre d'itérations avec la méthode de Dijkstra : " + compteur_etapes);
-    // System.out.println("Nombre de calculs avec la méthode de Dijkstra : " + compteur_calculs);
-    return v;
-    }
-
-/**
- * Retourne le nom de l'algorithme
- *
- * @return le nom de l'algorithme
- */
-public String toString() {
-    return "Dijkstra";
-}
+   /**
+    * Retourne le nom de l'algorithme
+    *
+    * @return le nom de l'algorithme
+    */
+   public String toString() {
+      return "Dijkstra";
+   }
 
 }
